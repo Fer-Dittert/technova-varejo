@@ -1,10 +1,11 @@
 # 📊 Data Lakehouse com AWS + dbt + Redshift
 
-## 📌 Objetivo
+## ⚠️ Status do Projeto
 
-Este projeto tem como objetivo construir uma arquitetura moderna de dados utilizando o conceito de Data Lakehouse, transformando dados brutos em informações analíticas organizadas e prontas para consumo.
+Este projeto está em desenvolvimento e tem como objetivo principal explorar a integração entre serviços da AWS e ferramentas de engenharia de dados, incluindo Amazon S3, AWS Glue, Lake Formation, Amazon Redshift e dbt.
 
-A solução abrange desde a ingestão de dados até a modelagem dimensional, permitindo análises eficientes e estruturadas.
+O foco foi a construção de uma arquitetura de dados e entendimento do fluxo ponta a ponta, desde ingestão até modelagem analítica, não sendo o objetivo principal a realização de maior limpeza ou tratamento avançado da qualidade dos dados.
+
 
 ---
 
