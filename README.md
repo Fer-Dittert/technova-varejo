@@ -82,7 +82,7 @@ models/
 - dim_data  
 
 A dimensão de data foi construída considerando todos os dias do período, permitindo análises temporais contínuas.
-
+A dimensão de status do pedido foi criada para transformar o campo textual de status em uma chave numérica, seguindo boas práticas de modelagem dimensional. Essa abordagem melhora a performance das consultas, padroniza os valores e facilita a análise por status de forma consistente.
 ---
 
 ## 🔗 Fontes de Dados
