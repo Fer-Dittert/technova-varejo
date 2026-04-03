@@ -1,36 +1,22 @@
-with limites as (
+{{ config(materialized='table') }}
 
-    select
-        min(cast(data_compra as date)) as data_min,
-        max(cast(data_compra as date)) as data_max
-    from {{ ref('int_vendas_enriquecidas') }}
+with datas as (
 
-),
-
-sequencia as (
-
-
-    select row_number() over () - 1 as n
-    from {{ ref('int_vendas_enriquecidas') }}
-    limit 5000
-
-),
-
-datas as (
-
-    select
-        dateadd(day, n, data_min) as id_data
-    from sequencia
-    cross join limites
-    where dateadd(day, n, data_min) <= data_max
+    select distinct
+        cast(data_compra as date) as data
+    from {{ ref('stg_pedidos') }}
+    where data_compra is not null
 
 )
 
 select
-    id_data,
-    extract(year from id_data) as ano,
-    extract(month from id_data) as mes,
-    extract(day from id_data) as dia,
-    extract(quarter from id_data) as trimestre,
-    extract(dow from id_data) as dia_semana_numero
+    cast(to_char(data, 'YYYYMMDD') as integer) as data_key,
+    data,
+    extract(year from data) as ano,
+    extract(quarter from data) as trimestre,
+    extract(month from data) as mes,
+    extract(day from data) as dia,
+    extract(dow from data) as numero_dia_semana,
+    to_char(data, 'Month') as nome_mes,
+    to_char(data, 'Day') as nome_dia_semana
 from datas

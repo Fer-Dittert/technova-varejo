@@ -1,15 +1,8 @@
-with source as (
+{{ config(materialized='table') }}
 
-    select *
-    from {{ ref('stg_clientes') }}
-
-)
-
-select
+select distinct
+    id_cliente as cliente_key,
     id_cliente,
     id_cliente_unico,
-    cep_cliente,
-    cidade_cliente,
-    estado_cliente
-
-from source
+    cep_cliente
+from {{ ref('stg_clientes') }}

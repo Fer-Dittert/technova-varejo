@@ -1,3 +1,5 @@
+{{ config(materialized='view') }}
+
 with vendas as (
 
     select *
