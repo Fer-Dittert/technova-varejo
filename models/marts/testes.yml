@@ -1,0 +1,80 @@
+version: 2
+
+models:
+
+  - name: dim_clientes
+    columns:
+      - name: id_cliente
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_produtos
+    columns:
+      - name: id_produto
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_vendedores
+    columns:
+      - name: id_vendedor
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_status_pedido
+    columns:
+      - name: id_status_pedido
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_data
+    columns:
+      - name: id_data
+        tests:
+          - not_null
+          - unique
+
+  - name: fato_vendas
+    columns:
+      - name: id_cliente
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_clientes')
+                field: id_cliente
+
+      - name: id_produto
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_produtos')
+                field: id_produto
+
+      - name: id_vendedor
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_vendedores')
+                field: id_vendedor
+
+      - name: id_status_pedido
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_status_pedido')
+                field: id_status_pedido
+
+      - name: id_data
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_data')
+                field: id_data
