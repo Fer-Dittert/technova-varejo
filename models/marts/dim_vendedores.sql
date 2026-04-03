@@ -1,14 +1,9 @@
-with source as (
+{{ config(materialized='table') }}
 
-    select *
-    from {{ ref('stg_vendedores') }}
-
-)
-
-select
+select distinct
+    id_vendedor as vendedor_key,
     id_vendedor,
     cep_vendedor,
     cidade_vendedor,
     estado_vendedor
-
-from source
+from {{ ref('stg_vendedores') }}
