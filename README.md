@@ -54,39 +54,49 @@ models/
 
 ``` 
 
-📊 Modelo Dimensional
-📌 Tabela Fato
+## 📊 Modelo Dimensional
 
-fct_vendas
+### 📌 Tabela Fato
 
-granularidade: item de pedido
-métricas:
-valor_item
-valor_frete
-valor_total_item
-indicadores:
-indicador_entregue
-indicador_atraso
-dias_entrega
-📌 Dimensões
-dim_clientes
-dim_produtos
-dim_vendedores
-dim_status_pedido
-dim_data
+**fct_vendas**
+
+- granularidade: item de pedido
+- métricas:
+  - valor_item
+  - valor_frete
+  - valor_total_item
+- indicadores:
+  - indicador_entregue
+  - indicador_atraso
+  - dias_entrega
+
+---
+
+### 📌 Dimensões
+
+- dim_clientes  
+- dim_produtos  
+- dim_vendedores  
+- dim_status_pedido  
+- dim_data  
 
 A dimensão de data foi construída considerando todos os dias do período, permitindo análises temporais contínuas.
 
-🔗 Fontes de Dados
+---
 
-As fontes foram definidas no dbt (sources.yml), apontando para as tabelas brutas disponibilizadas no Amazon Redshift.
+## 🔗 Fontes de Dados
+
+As fontes foram definidas no dbt (`sources.yml`), apontando para as tabelas brutas disponibilizadas no Amazon Redshift.
 
 Esses dados têm origem no Data Lake (Amazon S3), previamente catalogados pelo AWS Glue Data Catalog.
 
-⚙️ Tecnologias Utilizadas
-Amazon S3
-AWS Glue
-AWS Lake Formation
-Amazon Redshift (Serverless)
-dbt Cloud
-SQL
+---
+
+## ⚙️ Tecnologias Utilizadas
+
+- Amazon S3  
+- AWS Glue  
+- AWS Lake Formation  
+- Amazon Redshift (Serverless)  
+- dbt Cloud  
+- SQL  
