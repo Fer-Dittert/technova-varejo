@@ -3,44 +3,56 @@ version: 2
 models:
 
   - name: dim_clientes
+    description: "Dimensão de clientes contendo informações de localização e identificação."
     columns:
       - name: id_cliente
-        tests:
+        description: "Identificador único do cliente."
+        data_tests:
           - not_null
           - unique
 
   - name: dim_produtos
+    description: "Dimensão de produtos com atributos físicos e categoria."
     columns:
       - name: id_produto
-        tests:
+        description: "Identificador único do produto."
+        data_tests:
           - not_null
           - unique
 
   - name: dim_vendedores
+    description: "Dimensão de vendedores com localização."
     columns:
       - name: id_vendedor
-        tests:
+        description: "Identificador único do vendedor."
+        data_tests:
           - not_null
           - unique
 
   - name: dim_status_pedido
+    description: "Dimensão de status do pedido, transformando valores textuais em chave numérica."
     columns:
       - name: id_status_pedido
-        tests:
+        description: "Chave substituta do status do pedido."
+        data_tests:
           - not_null
           - unique
 
   - name: dim_data
+    description: "Dimensão de datas contendo atributos temporais para análise."
     columns:
       - name: id_data
-        tests:
+        description: "Data no formato date."
+        data_tests:
           - not_null
           - unique
 
   - name: fato_vendas
+    description: "Tabela fato de vendas com granularidade por item de pedido."
     columns:
       - name: id_cliente
-        tests:
+        description: "Chave estrangeira para dimensão de clientes."
+        data_tests:
           - not_null
           - relationships:
               arguments:
@@ -48,7 +60,8 @@ models:
                 field: id_cliente
 
       - name: id_produto
-        tests:
+        description: "Chave estrangeira para dimensão de produtos."
+        data_tests:
           - not_null
           - relationships:
               arguments:
@@ -56,7 +69,8 @@ models:
                 field: id_produto
 
       - name: id_vendedor
-        tests:
+        description: "Chave estrangeira para dimensão de vendedores."
+        data_tests:
           - not_null
           - relationships:
               arguments:
@@ -64,7 +78,8 @@ models:
                 field: id_vendedor
 
       - name: id_status_pedido
-        tests:
+        description: "Chave estrangeira para dimensão de status."
+        data_tests:
           - not_null
           - relationships:
               arguments:
@@ -72,7 +87,8 @@ models:
                 field: id_status_pedido
 
       - name: id_data
-        tests:
+        description: "Chave estrangeira para dimensão de datas."
+        data_tests:
           - not_null
           - relationships:
               arguments:
