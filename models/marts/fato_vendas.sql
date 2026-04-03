@@ -42,6 +42,10 @@ final as (
     left join dim_status ds
         on v.status_pedido = ds.status_pedido
 
+    where v.id_cliente is not null
+      and v.data_compra is not null
+      and ds.id_status_pedido is not null
+
 )
 
 select *
