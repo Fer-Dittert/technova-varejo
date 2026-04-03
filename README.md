@@ -101,3 +101,39 @@ Esses dados têm origem no Data Lake (Amazon S3), previamente catalogados pelo A
 - Amazon Redshift (Serverless)  
 - dbt Cloud  
 - SQL  
+
+
+---
+
+## 🧪 Qualidade de Dados
+
+Foram implementados testes de qualidade de dados utilizando dbt, garantindo a integridade das informações ao longo do pipeline.
+
+Foram aplicados testes como:
+
+- `not_null`: garante ausência de valores nulos em colunas críticas  
+- `unique`: assegura unicidade de chaves nas dimensões  
+- `relationships`: valida integridade referencial entre fato e dimensões  
+
+Esses testes permitem identificar inconsistências automaticamente, aumentando a confiabilidade dos dados disponíveis para análise.
+
+---
+
+## 🔁 Padronização de Transformações com Macros
+
+Para evitar repetição de código e garantir consistência nas transformações, foram utilizadas macros no dbt.
+
+Foi criada uma macro para padronização de campos textuais, aplicando limpeza e normalização de strings (remoção de espaços e padronização de caixa).
+
+Essa abordagem melhora a legibilidade do código, facilita manutenção e garante consistência nas transformações ao longo das camadas de dados.
+
+---
+
+## 🌉 Arquitetura Híbrida com Redshift Spectrum
+
+Foi utilizada uma abordagem híbrida de dados com Redshift Spectrum, permitindo a consulta de dados diretamente no Amazon S3 sem necessidade de carregamento físico no Redshift.
+
+Os dados armazenados no Data Lake foram previamente catalogados pelo AWS Glue Data Catalog, possibilitando a criação de um external schema no Redshift.
+
+Com isso, foi possível consultar a tabela externa `olist` diretamente via SQL.
+
