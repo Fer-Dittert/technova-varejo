@@ -1,18 +1,10 @@
 {{ config(materialized='table') }}
 
-with limites as (
+with sequencia as (
 
     select
-        min(cast(data_compra as date)) as data_min,
-        max(cast(data_compra as date)) as data_max
-    from {{ ref('int_vendas_enriquecidas') }}
-
-),
-
-sequencia as (
-
-    select row_number() over () - 1 as n
-    from {{ ref('int_vendas_enriquecidas') }}
+        row_number() over (order by relname) - 1 as n
+    from pg_class
     limit 5000
 
 ),
@@ -20,18 +12,23 @@ sequencia as (
 datas as (
 
     select
-        dateadd(day, n, data_min) as id_data
+        dateadd(day, n, cast('2016-01-01' as date)) as id_data
     from sequencia
-    cross join limites
-    where dateadd(day, n, data_min) <= data_max
+    where dateadd(day, n, cast('2016-01-01' as date)) <= cast('2025-12-31' as date)
 
 )
 
 select
     id_data,
-    extract(year from id_data) as ano,
-    extract(month from id_data) as mes,
-    extract(day from id_data) as dia,
-    extract(quarter from id_data) as trimestre,
-    extract(dow from id_data) as dia_semana_numero
+    date_part(year, id_data) as ano,
+    date_part(month, id_data) as mes,
+    date_part(day, id_data) as dia,
+    date_part(quarter, id_data) as trimestre,
+    date_part(dow, id_data) as dia_semana_numero,
+    to_char(id_data, 'Month') as nome_mes,
+    to_char(id_data, 'Day') as nome_dia_semana,
+    case
+        when date_part(dow, id_data) in (0, 6) then 1
+        else 0
+    end as fim_de_semana
 from datas
