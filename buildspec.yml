@@ -1,0 +1,11 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - python3 -m pip install dbt-redshift
+      - mkdir -p ~/.dbt
+      - echo "$DBT_PROFILE" > ~/.dbt/profiles.yml
+      - cd dbt && dbt debug && dbt test
+      - cd ..
+      - aws s3 sync glue/ s3://tech-nova-varejo/scripts/glue/
